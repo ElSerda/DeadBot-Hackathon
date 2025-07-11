@@ -1,0 +1,25 @@
+{
+  "manifestVersion": 1,
+  "executable": "./g-assist-plugin-python.exe",
+  "persistent": true,
+  "functions": [
+    {
+      "name": "gpu_diag",
+      "description": "Returns NVIDIA GPU diagnostics (usage, vram, temperature, etc.)",
+      "tags": ["gpu", "nvidia", "diag"]
+    },
+    {
+      "name": "cpu_diag",
+      "description": "Returns CPU diagnostics (usage, cores, threads)",
+      "tags": ["cpu", "diag"]
+    },
+    {
+      "name": "initialize",
+      "description": "Initialise le plugin avant traitement"
+    },
+    {
+      "name": "shutdown",
+      "description": "Ferme proprement le plugin"
+    }
+  ]
+}

@@ -1,0 +1,738 @@
+[
+  {
+    "scenario": "cpu_diag_reel",
+    "status": "✅",
+    "diagnostic": "CPU idle, aucun souci détecté.",
+    "result": {
+      "success": true,
+      "cpu_usage_percent": 4.6,
+      "cores": 16,
+      "threads": 32,
+      "frequency_MHz": 4300.0,
+      "frequency_max_MHz": 4300.0,
+      "diagnostic": "CPU idle, aucun souci détecté."
+    }
+  },
+  {
+    "scenario": "gpu_diag_reel",
+    "status": "✅",
+    "diagnostic": "GPU idle, aucun souci détecté. (Fréq: 255/2130 MHz) | Raison throttle détectée : Idle",
+    "result": {
+      "success": true,
+      "gpu_name": "NVIDIA GeForce RTX 3080",
+      "gpu_usage_percent": 9,
+      "graphics_clock_MHz": 255,
+      "graphics_clock_max_MHz": 2130,
+      "graphics_clock_percent": 11.971830985915492,
+      "vram_used_MB": 2021,
+      "vram_total_MB": 10240,
+      "vram_util_percent": 19.741783142089844,
+      "temperature_C": 33,
+      "fan_speed_percent": 0,
+      "power_usage_W": 37,
+      "power_limit_W": 370,
+      "perf_state": 8,
+      "driver_version": "576.88",
+      "diagnostic": "GPU idle, aucun souci détecté. (Fréq: 255/2130 MHz) | Raison throttle détectée : Idle"
+    }
+  },
+  {
+    "scenario": "cpu_idle",
+    "status": "✅",
+    "diagnostic": "CPU idle, aucun souci détecté.",
+    "result": {
+      "success": true,
+      "cpu_usage_percent": 2.5,
+      "cores": 16,
+      "threads": 32,
+      "frequency_MHz": 4300,
+      "frequency_max_MHz": 4300,
+      "diagnostic": "CPU idle, aucun souci détecté."
+    }
+  },
+  {
+    "scenario": "cpu_full",
+    "status": "✅",
+    "diagnostic": "ALERTE: Charge CPU critique !",
+    "result": {
+      "success": true,
+      "cpu_usage_percent": 99.9,
+      "cores": 16,
+      "threads": 32,
+      "frequency_MHz": 4300,
+      "frequency_max_MHz": 4300,
+      "diagnostic": "ALERTE: Charge CPU critique !"
+    }
+  },
+  {
+    "scenario": "cpu_throttle",
+    "status": "✅",
+    "diagnostic": "ALERTE: Charge CPU critique ET fréquence réduite (2100/4300 MHz) – possible throttling !",
+    "result": {
+      "success": true,
+      "cpu_usage_percent": 99.9,
+      "cores": 16,
+      "threads": 32,
+      "frequency_MHz": 2100,
+      "frequency_max_MHz": 4300,
+      "diagnostic": "ALERTE: Charge CPU critique ET fréquence réduite (2100/4300 MHz) – possible throttling !"
+    }
+  },
+  {
+    "scenario": "cpu_mi_charge",
+    "status": "✅",
+    "diagnostic": "Charge CPU normale.",
+    "result": {
+      "success": true,
+      "cpu_usage_percent": 55.0,
+      "cores": 16,
+      "threads": 32,
+      "frequency_MHz": 3500,
+      "frequency_max_MHz": 4300,
+      "diagnostic": "Charge CPU normale."
+    }
+  },
+  {
+    "scenario": "cpu_freq_crash",
+    "status": "✅",
+    "diagnostic": "Erreur : impossible de lire la fréquence CPU (donnée manquante ou invalide).",
+    "result": {
+      "success": true,
+      "cpu_usage_percent": 90.0,
+      "cores": 16,
+      "threads": 32,
+      "frequency_MHz": null,
+      "frequency_max_MHz": null,
+      "diagnostic": "Erreur : impossible de lire la fréquence CPU (donnée manquante ou invalide)."
+    }
+  },
+  {
+    "scenario": "gpu_idle",
+    "status": "✅",
+    "diagnostic": "GPU idle, aucun souci détecté. (Fréq: 900/1800 MHz) | ALERTE: Limite de puissance atteinte (80/80W) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 2,
+      "graphics_clock_MHz": 900,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 50.0,
+      "vram_used_MB": 100,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 9.765625,
+      "temperature_C": 42,
+      "fan_speed_percent": 33,
+      "power_usage_W": 80,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "GPU idle, aucun souci détecté. (Fréq: 900/1800 MHz) | ALERTE: Limite de puissance atteinte (80/80W) !"
+    }
+  },
+  {
+    "scenario": "gpu_full",
+    "status": "✅",
+    "diagnostic": "ALERTE: Charge GPU critique ET fréquence réduite (900/1800 MHz) — possible throttling ! | ALERTE: Limite de puissance atteinte (80/80W) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 99,
+      "graphics_clock_MHz": 900,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 50.0,
+      "vram_used_MB": 100,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 9.765625,
+      "temperature_C": 42,
+      "fan_speed_percent": 33,
+      "power_usage_W": 80,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "ALERTE: Charge GPU critique ET fréquence réduite (900/1800 MHz) — possible throttling ! | ALERTE: Limite de puissance atteinte (80/80W) !"
+    }
+  },
+  {
+    "scenario": "gpu_mi_charge",
+    "status": "✅",
+    "diagnostic": "Attention : Fréquence GPU réduite sous charge (900/1800 MHz), limitation probable (throttle/power/temp) ! | ALERTE: Limite de puissance atteinte (80/80W) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 55,
+      "graphics_clock_MHz": 900,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 50.0,
+      "vram_used_MB": 100,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 9.765625,
+      "temperature_C": 42,
+      "fan_speed_percent": 33,
+      "power_usage_W": 80,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Attention : Fréquence GPU réduite sous charge (900/1800 MHz), limitation probable (throttle/power/temp) ! | ALERTE: Limite de puissance atteinte (80/80W) !"
+    }
+  },
+  {
+    "scenario": "gpu_vram_sat",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 900/1800 MHz) | ALERTE: VRAM saturée (99.6%) ! | ALERTE: Limite de puissance atteinte (80/80W) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 40,
+      "graphics_clock_MHz": 900,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 50.0,
+      "vram_used_MB": 1020,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 99.609375,
+      "temperature_C": 42,
+      "fan_speed_percent": 33,
+      "power_usage_W": 80,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 900/1800 MHz) | ALERTE: VRAM saturée (99.6%) ! | ALERTE: Limite de puissance atteinte (80/80W) !"
+    }
+  },
+  {
+    "scenario": "gpu_temp_haute",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 900/1800 MHz) | ALERTE: Température GPU élevée (90°C) ! | ALERTE: VRAM saturée (99.6%) ! | ALERTE: Limite de puissance atteinte (80/80W) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 40,
+      "graphics_clock_MHz": 900,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 50.0,
+      "vram_used_MB": 1020,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 99.609375,
+      "temperature_C": 90,
+      "fan_speed_percent": 33,
+      "power_usage_W": 80,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 900/1800 MHz) | ALERTE: Température GPU élevée (90°C) ! | ALERTE: VRAM saturée (99.6%) ! | ALERTE: Limite de puissance atteinte (80/80W) !"
+    }
+  },
+  {
+    "scenario": "gpu_crash_valeur",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 900/1800 MHz) | ALERTE: Température GPU élevée (90°C) ! | ALERTE: Limite de puissance atteinte (80/80W) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 40,
+      "graphics_clock_MHz": 900,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 50.0,
+      "vram_used_MB": -1,
+      "vram_total_MB": 0,
+      "vram_util_percent": -0.09765625,
+      "temperature_C": 90,
+      "fan_speed_percent": 33,
+      "power_usage_W": 80,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 900/1800 MHz) | ALERTE: Température GPU élevée (90°C) ! | ALERTE: Limite de puissance atteinte (80/80W) !"
+    }
+  },
+  {
+    "scenario": "gpu_driver_crash",
+    "status": "❌",
+    "diagnostic": "Crash driver GPU détecté : DeadBot ne peut plus accéder au driver NVIDIA. Monitoring impossible tant que le driver n’est pas réinitialisé.",
+    "result": {
+      "success": false,
+      "message": "Crash driver GPU détecté : DeadBot ne peut plus accéder au driver NVIDIA. Monitoring impossible tant que le driver n’est pas réinitialisé."
+    }
+  },
+  {
+    "scenario": "gpu_nvml_driver_lost",
+    "status": "❌",
+    "diagnostic": "Crash driver GPU détecté : DeadBot ne peut plus accéder au driver NVIDIA. Monitoring impossible tant que le driver n’est pas réinitialisé.",
+    "result": {
+      "success": false,
+      "message": "Crash driver GPU détecté : DeadBot ne peut plus accéder au driver NVIDIA. Monitoring impossible tant que le driver n’est pas réinitialisé."
+    }
+  },
+  {
+    "scenario": "gpu_idle_pur",
+    "status": "✅",
+    "diagnostic": "GPU idle, aucun souci détecté. (Fréq: 500/1800 MHz)",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 3,
+      "graphics_clock_MHz": 500,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 27.77777777777778,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 7.450580596923828e-06,
+      "temperature_C": 35,
+      "fan_speed_percent": 33,
+      "power_usage_W": 30,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "GPU idle, aucun souci détecté. (Fréq: 500/1800 MHz)"
+    }
+  },
+  {
+    "scenario": "gpu_mi_charge",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 1300/1800 MHz)",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 55,
+      "graphics_clock_MHz": 1300,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 72.22222222222221,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 3.725290298461914e-05,
+      "temperature_C": 60,
+      "fan_speed_percent": 60,
+      "power_usage_W": 60,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 1300/1800 MHz)"
+    }
+  },
+  {
+    "scenario": "gpu_full",
+    "status": "✅",
+    "diagnostic": "ALERTE: Charge GPU critique ! (Fréq: 1800/1800 MHz)",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 99,
+      "graphics_clock_MHz": 1800,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 100.0,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 5.587935447692871e-05,
+      "temperature_C": 75,
+      "fan_speed_percent": 80,
+      "power_usage_W": 70,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "ALERTE: Charge GPU critique ! (Fréq: 1800/1800 MHz)"
+    }
+  },
+  {
+    "scenario": "gpu_throttle_power",
+    "status": "✅",
+    "diagnostic": "ALERTE: Charge GPU critique ET fréquence réduite (1000/1800 MHz) — possible throttling ! | ALERTE: Limite de puissance atteinte (80/80W) ! | Raison throttle détectée : SW Power Cap",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 99,
+      "graphics_clock_MHz": 1000,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 55.55555555555556,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 5.587935447692871e-05,
+      "temperature_C": 70,
+      "fan_speed_percent": 70,
+      "power_usage_W": 80,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "ALERTE: Charge GPU critique ET fréquence réduite (1000/1800 MHz) — possible throttling ! | ALERTE: Limite de puissance atteinte (80/80W) ! | Raison throttle détectée : SW Power Cap"
+    }
+  },
+  {
+    "scenario": "gpu_throttle_thermal",
+    "status": "✅",
+    "diagnostic": "ALERTE: Charge GPU critique ET fréquence réduite (900/1800 MHz) — possible throttling ! | ALERTE: Température GPU élevée (90°C) ! | Raison throttle détectée : HW Thermal Slowdown",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 99,
+      "graphics_clock_MHz": 900,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 50.0,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 5.587935447692871e-05,
+      "temperature_C": 90,
+      "fan_speed_percent": 95,
+      "power_usage_W": 70,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "ALERTE: Charge GPU critique ET fréquence réduite (900/1800 MHz) — possible throttling ! | ALERTE: Température GPU élevée (90°C) ! | Raison throttle détectée : HW Thermal Slowdown"
+    }
+  },
+  {
+    "scenario": "gpu_power_limit_only",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 1700/1800 MHz) | ALERTE: Limite de puissance atteinte (80/80W) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 80,
+      "graphics_clock_MHz": 1700,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 94.44444444444444,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 4.6566128730773926e-05,
+      "temperature_C": 65,
+      "fan_speed_percent": 70,
+      "power_usage_W": 80,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 1700/1800 MHz) | ALERTE: Limite de puissance atteinte (80/80W) !"
+    }
+  },
+  {
+    "scenario": "gpu_temp_haute",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 1300/1800 MHz) | ALERTE: Température GPU élevée (95°C) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 50,
+      "graphics_clock_MHz": 1300,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 72.22222222222221,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 3.725290298461914e-05,
+      "temperature_C": 95,
+      "fan_speed_percent": 60,
+      "power_usage_W": 60,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 1300/1800 MHz) | ALERTE: Température GPU élevée (95°C) !"
+    }
+  },
+  {
+    "scenario": "gpu_vram_saturee",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 1400/1800 MHz) | ALERTE: VRAM saturée (96.7%) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 60,
+      "graphics_clock_MHz": 1400,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 77.77777777777779,
+      "vram_used_MB": 990,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 96.6796875,
+      "temperature_C": 55,
+      "fan_speed_percent": 60,
+      "power_usage_W": 60,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 1400/1800 MHz) | ALERTE: VRAM saturée (96.7%) !"
+    }
+  },
+  {
+    "scenario": "gpu_throttle_multi",
+    "status": "✅",
+    "diagnostic": "ALERTE: Charge GPU critique ET fréquence réduite (1000/1800 MHz) — possible throttling ! | ALERTE: Limite de puissance atteinte (80/80W) ! | Raison throttle détectée : SW Power Cap, HW Thermal Slowdown",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 95,
+      "graphics_clock_MHz": 1000,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 55.55555555555556,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 5.587935447692871e-05,
+      "temperature_C": 70,
+      "fan_speed_percent": 70,
+      "power_usage_W": 80,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "ALERTE: Charge GPU critique ET fréquence réduite (1000/1800 MHz) — possible throttling ! | ALERTE: Limite de puissance atteinte (80/80W) ! | Raison throttle détectée : SW Power Cap, HW Thermal Slowdown"
+    }
+  },
+  {
+    "scenario": "gpu_driver_ko",
+    "status": "❌",
+    "diagnostic": "Crash driver GPU détecté : DeadBot ne peut plus accéder au driver NVIDIA. Monitoring impossible tant que le driver n’est pas réinitialisé.",
+    "result": {
+      "success": false,
+      "message": "Crash driver GPU détecté : DeadBot ne peut plus accéder au driver NVIDIA. Monitoring impossible tant que le driver n’est pas réinitialisé."
+    }
+  },
+  {
+    "scenario": "gpu_nvml_exception",
+    "status": "❌",
+    "diagnostic": "Crash driver GPU détecté : DeadBot ne peut plus accéder au driver NVIDIA. Monitoring impossible tant que le driver n’est pas réinitialisé.",
+    "result": {
+      "success": false,
+      "message": "Crash driver GPU détecté : DeadBot ne peut plus accéder au driver NVIDIA. Monitoring impossible tant que le driver n’est pas réinitialisé."
+    }
+  },
+  {
+    "scenario": "gpu_sensors_zero",
+    "status": "✅",
+    "diagnostic": "GPU idle, aucun souci détecté. (Fréq: inconnue)",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 0,
+      "graphics_clock_MHz": 0,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 0.0,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 0.0,
+      "temperature_C": 0,
+      "fan_speed_percent": 0,
+      "power_usage_W": 0,
+      "power_limit_W": 80,
+      "perf_state": 8,
+      "driver_version": "576.88",
+      "diagnostic": "GPU idle, aucun souci détecté. (Fréq: inconnue)"
+    }
+  },
+  {
+    "scenario": "gpu_freq_instable",
+    "status": "✅",
+    "diagnostic": "Attention : Fréquence GPU réduite sous charge (600/1800 MHz), limitation probable (throttle/power/temp) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 55,
+      "graphics_clock_MHz": 600,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 33.33333333333333,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 3.725290298461914e-05,
+      "temperature_C": 60,
+      "fan_speed_percent": 60,
+      "power_usage_W": 60,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Attention : Fréquence GPU réduite sous charge (600/1800 MHz), limitation probable (throttle/power/temp) !"
+    }
+  },
+  {
+    "scenario": "gpu_pstate_eleve",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 1300/1800 MHz)",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 50,
+      "graphics_clock_MHz": 1300,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 72.22222222222221,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 3.725290298461914e-05,
+      "temperature_C": 60,
+      "fan_speed_percent": 60,
+      "power_usage_W": 60,
+      "power_limit_W": 80,
+      "perf_state": 8,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 1300/1800 MHz)"
+    }
+  },
+  {
+    "scenario": "gpu_fan_zero_ok",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 1300/1800 MHz)",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 40,
+      "graphics_clock_MHz": 1300,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 72.22222222222221,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 3.725290298461914e-05,
+      "temperature_C": 50,
+      "fan_speed_percent": 0,
+      "power_usage_W": 60,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 1300/1800 MHz)"
+    }
+  },
+  {
+    "scenario": "gpu_fan_zero_temp_haute",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 1400/1800 MHz) | ALERTE: Température GPU élevée (90°C) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 60,
+      "graphics_clock_MHz": 1400,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 77.77777777777779,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 3.725290298461914e-05,
+      "temperature_C": 90,
+      "fan_speed_percent": 0,
+      "power_usage_W": 60,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 1400/1800 MHz) | ALERTE: Température GPU élevée (90°C) !"
+    }
+  },
+  {
+    "scenario": "gpu_handle_perdu",
+    "status": "❌",
+    "diagnostic": "Erreur inattendue lors de la récupération des infos GPU : exception: access violation reading 0x0000000000000000",
+    "result": {
+      "success": false,
+      "message": "Erreur inattendue lors de la récupération des infos GPU : exception: access violation reading 0x0000000000000000"
+    }
+  },
+  {
+    "scenario": "gpu_locked_vram_basse",
+    "status": "✅",
+    "diagnostic": "ALERTE: Charge GPU critique ! (Fréq: 1800/1800 MHz) | ALERTE: Limite de puissance atteinte (80/80W) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 100,
+      "graphics_clock_MHz": 1800,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 100.0,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 7.450580596923828e-06,
+      "temperature_C": 60,
+      "fan_speed_percent": 80,
+      "power_usage_W": 80,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "ALERTE: Charge GPU critique ! (Fréq: 1800/1800 MHz) | ALERTE: Limite de puissance atteinte (80/80W) !"
+    }
+  },
+  {
+    "scenario": "gpu_vram_full_usage_faible",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 900/1800 MHz) | ALERTE: VRAM saturée (96.7%) !",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 10,
+      "graphics_clock_MHz": 900,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 50.0,
+      "vram_used_MB": 990,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 96.6796875,
+      "temperature_C": 50,
+      "fan_speed_percent": 33,
+      "power_usage_W": 40,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 900/1800 MHz) | ALERTE: VRAM saturée (96.7%) !"
+    }
+  },
+  {
+    "scenario": "gpu_idle_fan_100",
+    "status": "✅",
+    "diagnostic": "GPU idle, aucun souci détecté. (Fréq: 500/1800 MHz)",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 5,
+      "graphics_clock_MHz": 500,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 27.77777777777778,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 9.313225746154785e-06,
+      "temperature_C": 30,
+      "fan_speed_percent": 100,
+      "power_usage_W": 30,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "GPU idle, aucun souci détecté. (Fréq: 500/1800 MHz)"
+    }
+  },
+  {
+    "scenario": "gpu_driver_old",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 1300/1800 MHz)",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 60,
+      "graphics_clock_MHz": 1300,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 72.22222222222221,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 3.725290298461914e-05,
+      "temperature_C": 60,
+      "fan_speed_percent": 60,
+      "power_usage_W": 60,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 1300/1800 MHz)"
+    }
+  },
+  {
+    "scenario": "gpu_undervolting_oc",
+    "status": "✅",
+    "diagnostic": "Charge GPU normale. (Fréq: 2000/1800 MHz)",
+    "result": {
+      "success": true,
+      "gpu_name": "FakeGPU",
+      "gpu_usage_percent": 60,
+      "graphics_clock_MHz": 2000,
+      "graphics_clock_max_MHz": 1800,
+      "graphics_clock_percent": 111.11111111111111,
+      "vram_used_MB": 0,
+      "vram_total_MB": 1024,
+      "vram_util_percent": 3.725290298461914e-05,
+      "temperature_C": 60,
+      "fan_speed_percent": 60,
+      "power_usage_W": 60,
+      "power_limit_W": 80,
+      "perf_state": 1,
+      "driver_version": "576.88",
+      "diagnostic": "Charge GPU normale. (Fréq: 2000/1800 MHz)"
+    }
+  },
+  {
+    "scenario": "gpu_pynvml_not_available",
+    "status": "❌",
+    "diagnostic": "no pynvml",
+    "result": {
+      "success": false,
+      "message": "no pynvml"
+    }
+  }
+]

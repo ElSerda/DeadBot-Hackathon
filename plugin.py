@@ -7,8 +7,17 @@ import ctypes
 import json
 import logging
 import psutil
-
+from llm_backend import LLMBackend
 from ctypes import wintypes
+
+llm_backend = LLMBackend()
+
+def llm_query(prompt, params=None, context=None, system_info=None):
+    try:
+        response = llm_backend.generate(prompt)
+        return {"success": True, "message": response}
+    except Exception as e:
+        return {"success": False, "message": str(e)}
 
 # --- PATCH DLL / PATH (avant tout import NVML)
 nvml_path = r"C:\Windows\System32\nvml.dll"
@@ -233,6 +242,7 @@ def main():
         format="%(asctime)s - %(levelname)s - %(message)s"
     )
     COMMANDS = {
+        "llm_query": llm_query,
         'gpu_diag': gpu_diag,
         'cpu_diag': cpu_diag,
         'initialize': lambda *a, **k: {"success": True, "message": "initialized"},

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # DeadBot Light – G-Assist Diagnostic Plugin
 [![G-Assist Ready](https://img.shields.io/badge/G--Assist-ready-brightgreen)]()
 
@@ -315,4 +314,3 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ## Contributing
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
->>>>>>> upstream/main

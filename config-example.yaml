@@ -1,0 +1,8 @@
+default_model: openai
+
+openai:
+  api_key: "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+ollama:
+  url: "http://localhost:11434"
+  model: "llama3"

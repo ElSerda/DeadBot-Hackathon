@@ -20,3 +20,8 @@ pynvml
 pywin32>=223
 pyinstaller==6.11.0
 colorama>=0.4.6
+pyyaml
+requests
+openai
+pandas
+matplotlib

@@ -43,3 +43,7 @@ Utilisation:
 - !bench : Démarre un benchmark en temps réel, avec export des données et génération d'un graphique.
 
 - !switch : Bascule entre les différents backends LLM disponibles (OpenAI, Ollama).
+
+Démo Vidéo:
+
+[text](https://www.youtube.com/watch?v=n7vQVmsQYU8)

@@ -46,4 +46,4 @@ Utilisation:
 
 Démo Vidéo:
 
-[text](https://www.youtube.com/watch?v=n7vQVmsQYU8)
+[DeadBot Plugin](https://www.youtube.com/watch?v=n7vQVmsQYU8)

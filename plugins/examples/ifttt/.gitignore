@@ -1,6 +1,0 @@
-.venv
-build
-dist
-test_ign_news.py
-
-*.spec

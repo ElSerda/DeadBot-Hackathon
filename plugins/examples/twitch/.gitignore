@@ -1,6 +1,0 @@
-.venv
-build
-config.json
-dist
-
-*.spec

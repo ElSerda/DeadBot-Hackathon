@@ -24,7 +24,7 @@ log/
 logs/
 
 # Fichiers générés par PyInstaller
-dist/
+#dist/
 build/
 
 # Configs IDE

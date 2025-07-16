@@ -1,0 +1,9 @@
+# config_template.yaml
+api_keys:
+  openai: "YOUR_OPENAI_KEY"
+  deepseek: "YOUR_DEEPSEEK_KEY"
+  ollama: "localhost"
+
+alert:
+  cpu: { warning: 70, critical: 90 }
+  gpu: { warning: 75, critical: 95 }

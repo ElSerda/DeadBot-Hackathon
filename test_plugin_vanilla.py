@@ -76,8 +76,8 @@ if __name__ == "__main__":
 
     # --- TEST RÉEL
     banner("TEST RÉEL")
-    format_diag("CPU DIAG (réel)", plugin.cpu_diag(), loglist, scenario="cpu_diag_reel")
-    format_diag("GPU DIAG (réel)", plugin.gpu_diag(), loglist, scenario="gpu_diag_reel")
+    format_diag("CPU DIAG (réel)", plugin.execute_cpu_diag_command(), loglist, scenario="cpu_diag_reel")
+    format_diag("GPU DIAG (réel)", plugin.execute_gpu_diag_command(), loglist, scenario="gpu_diag_reel")
 
     # --- FAKE CPU DIAGs (Monkeypatch)
     banner("FAKE CPU DIAGS (idle, 100%, mi-charge, freq throttle, crash)")
@@ -87,22 +87,22 @@ if __name__ == "__main__":
     # Idle
     plugin.psutil.cpu_percent = lambda interval=0.2: 2.5
     plugin.psutil.cpu_freq = lambda: type("F", (), {"current": 4300, "max": 4300})()
-    format_diag("CPU idle", plugin.cpu_diag(), loglist, scenario="cpu_idle")
+    format_diag("CPU idle", plugin.execute_cpu_diag_command(), loglist, scenario="cpu_idle")
 
     # Full
     plugin.psutil.cpu_percent = lambda interval=0.2: 99.9
     plugin.psutil.cpu_freq = lambda: type("F", (), {"current": 4300, "max": 4300})()
-    format_diag("CPU full", plugin.cpu_diag(), loglist, scenario="cpu_full")
+    format_diag("CPU full", plugin.execute_cpu_diag_command(), loglist, scenario="cpu_full")
 
     # Throttle (freq basse sous charge)
     plugin.psutil.cpu_percent = lambda interval=0.2: 99.9
     plugin.psutil.cpu_freq = lambda: type("F", (), {"current": 2100, "max": 4300})()
-    format_diag("CPU throttle", plugin.cpu_diag(), loglist, scenario="cpu_throttle")
+    format_diag("CPU throttle", plugin.execute_cpu_diag_command(), loglist, scenario="cpu_throttle")
 
     # Mi-charge
     plugin.psutil.cpu_percent = lambda interval=0.2: 55.0
     plugin.psutil.cpu_freq = lambda: type("F", (), {"current": 3500, "max": 4300})()
-    format_diag("CPU mi-charge", plugin.cpu_diag(), loglist, scenario="cpu_mi_charge")
+    format_diag("CPU mi-charge", plugin.execute_cpu_diag_command(), loglist, scenario="cpu_mi_charge")
 
     # Crash test (attribut manquant)
     def fake_freq_crash():
@@ -111,7 +111,7 @@ if __name__ == "__main__":
     plugin.psutil.cpu_percent = lambda interval=0.2: 90.0
     plugin.psutil.cpu_freq = fake_freq_crash
     try:
-        format_diag("CPU freq crash", plugin.cpu_diag(), loglist, scenario="cpu_freq_crash")
+        format_diag("CPU freq crash", plugin.execute_cpu_diag_command(), loglist, scenario="cpu_freq_crash")
     except Exception as e:
         format_diag("CPU freq crash — catch", {"success": False, "message": str(e)}, loglist, scenario="cpu_freq_crash_catch")
 
@@ -164,29 +164,29 @@ if __name__ == "__main__":
 
         # GPU idle
         Util.gpu = 2
-        format_diag("GPU idle", plugin.gpu_diag(), loglist, scenario="gpu_idle")
+        format_diag("GPU idle", plugin.execute_gpu_diag_command(), loglist, scenario="gpu_idle")
 
         # GPU full
         Util.gpu = 99
-        format_diag("GPU full", plugin.gpu_diag(), loglist, scenario="gpu_full")
+        format_diag("GPU full", plugin.execute_gpu_diag_command(), loglist, scenario="gpu_full")
 
         # GPU mi-charge
         Util.gpu = 55
-        format_diag("GPU mi-charge", plugin.gpu_diag(), loglist, scenario="gpu_mi_charge")
+        format_diag("GPU mi-charge", plugin.execute_gpu_diag_command(), loglist, scenario="gpu_mi_charge")
 
         # VRAM saturée
         plugin.pynvml.nvmlDeviceGetMemoryInfo = lambda h: MemSat()
         Util.gpu = 40
-        format_diag("GPU VRAM saturée", plugin.gpu_diag(), loglist, scenario="gpu_vram_sat")
+        format_diag("GPU VRAM saturée", plugin.execute_gpu_diag_command(), loglist, scenario="gpu_vram_sat")
 
         # Temp élevée
         plugin.pynvml.nvmlDeviceGetTemperature = lambda h, t: 90
-        format_diag("GPU Temp haute", plugin.gpu_diag(), loglist, scenario="gpu_temp_haute")
+        format_diag("GPU Temp haute", plugin.execute_gpu_diag_command(), loglist, scenario="gpu_temp_haute")
 
         # Fausse valeur/crash (negatif)
         plugin.pynvml.nvmlDeviceGetMemoryInfo = lambda h: MemFake()
         try:
-            format_diag("GPU crash valeur fausse", plugin.gpu_diag(), loglist, scenario="gpu_crash_valeur")
+            format_diag("GPU crash valeur fausse", plugin.execute_gpu_diag_command(), loglist, scenario="gpu_crash_valeur")
         except Exception as e:
             format_diag("GPU crash valeur fausse — catch", {"success": False, "message": str(e)}, loglist, scenario="gpu_crash_valeur_catch")
 
@@ -194,7 +194,7 @@ if __name__ == "__main__":
         print("\n--- SIMULATEUR : Crash driver GPU (NVML KO) ---")
         orig_NVML_OK = plugin.NVML_OK
         plugin.NVML_OK = False  # Force le plugin à croire que le driver est KO
-        format_diag("GPU driver crash/NVML KO", plugin.gpu_diag(), loglist, scenario="gpu_driver_crash")
+        format_diag("GPU driver crash/NVML KO", plugin.execute_gpu_diag_command(), loglist, scenario="gpu_driver_crash")
         plugin.NVML_OK = orig_NVML_OK
 
         # --- Simule exception NVML / driver lost ---
@@ -203,7 +203,7 @@ if __name__ == "__main__":
             raise Exception("NVML driver lost: device is gone")
         orig_nvmlDeviceGetHandleByIndex = plugin.pynvml.nvmlDeviceGetHandleByIndex
         plugin.pynvml.nvmlDeviceGetHandleByIndex = raise_nvml_error
-        format_diag("GPU exception driver lost", plugin.gpu_diag(), loglist, scenario="gpu_nvml_driver_lost")
+        format_diag("GPU exception driver lost", plugin.execute_gpu_diag_command(), loglist, scenario="gpu_nvml_driver_lost")
         plugin.pynvml.nvmlDeviceGetHandleByIndex = orig_nvmlDeviceGetHandleByIndex
 
             # === BATCH SCÉNARIOS GPU CROWD/EXTREMES ===
@@ -265,7 +265,7 @@ if __name__ == "__main__":
             # Monkeypatch function to raise Exception
             plugin.pynvml.nvmlDeviceGetHandleByIndex = lambda i: (_ for _ in ()).throw(Exception("NVML driver lost: device is gone"))
             try:
-                format_diag(f"{label}", plugin.gpu_diag(), loglist, scenario=scenario_labels[idx])
+                format_diag(f"{label}", plugin.execute_gpu_diag_command(), loglist, scenario=scenario_labels[idx])
             except Exception as e:
                 format_diag(f"{label} — catch", {"success": False, "message": str(e)}, loglist, scenario=f"{scenario_labels[idx]}_catch")
             # Restore
@@ -275,21 +275,21 @@ if __name__ == "__main__":
             # Simule un handle perdu (None)
             plugin.pynvml.nvmlDeviceGetHandleByIndex = lambda i: None
             try:
-                format_diag(f"{label}", plugin.gpu_diag(), loglist, scenario=scenario_labels[idx])
+                format_diag(f"{label}", plugin.execute_gpu_diag_command(), loglist, scenario=scenario_labels[idx])
             except Exception as e:
                 format_diag(f"{label} — catch", {"success": False, "message": str(e)}, loglist, scenario=f"{scenario_labels[idx]}_catch")
             plugin.pynvml.nvmlDeviceGetHandleByIndex = orig_nvmlDeviceGetHandleByIndex
             continue
         if "Driver KO" in label:
             plugin.NVML_OK = False
-            format_diag(f"{label}", plugin.gpu_diag(), loglist, scenario=scenario_labels[idx])
+            format_diag(f"{label}", plugin.execute_gpu_diag_command(), loglist, scenario=scenario_labels[idx])
             plugin.NVML_OK = orig_NVML_OK
             continue
         if "Driver trop ancien" in label:
             # Simule version ancienne
             plugin.pynvml.nvmlSystemGetDriverVersion = lambda: b"410.00"
         set_gpu(gpu, vram, temp, clk, maxclk, power, pwlim, fan, throttle, drv, name, pstate)
-        format_diag(f"{label}", plugin.gpu_diag(), loglist, scenario=scenario_labels[idx])
+        format_diag(f"{label}", plugin.execute_gpu_diag_command(), loglist, scenario=scenario_labels[idx])
         # Reset all
         plugin.pynvml.nvmlDeviceGetUtilizationRates = orig_nvmlDeviceGetUtilizationRates
         plugin.pynvml.nvmlDeviceGetMemoryInfo = orig_nvmlDeviceGetMemoryInfo

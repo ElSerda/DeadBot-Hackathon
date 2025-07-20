@@ -1,10 +1,13 @@
+from path_utils import get_config_path
 import yaml
 import requests
 from openai import OpenAI
 
 class LLMBackend:
     def __init__(self, config_path="config.yaml"):
-        with open(config_path, "r", encoding="utf-8") as f:
+        config_path = get_config_path()
+        from path_utils import resource_path
+        with open(resource_path("config.yaml"), "r") as f:
             self.config = yaml.safe_load(f)
         self.current_model = self.config.get("default_model", "openai")
         openai_key = self.config.get("openai", {}).get("api_key")
@@ -18,6 +21,8 @@ class LLMBackend:
 
     def detect_backends(self):
         self.available_backends.clear()
+        if self.check_deepseek():  # Ajout de la vérification DeepSeek
+            self.available_backends.append("deepseek")
         if self.check_openai():
             self.available_backends.append("openai")
         if self.check_ollama():
@@ -26,6 +31,21 @@ class LLMBackend:
             self.current_model = self.available_backends[0] if self.available_backends else None
         print(f"[LLMBackend] Available backends: {self.available_backends}")
         print(f"[LLMBackend] Current backend: {self.current_model}")
+
+    def check_deepseek(self):
+        api_key = self.config.get("deepseek", {}).get("api_key")
+        if not api_key:
+            return False
+        try:
+            response = requests.get(
+                "https://api.deepseek.com/v1/models",
+                headers={"Authorization": f"Bearer {api_key}"},
+                timeout=4
+            )
+            return response.status_code == 200
+        except Exception:
+            return False
+
 
     def check_openai(self):
         key = self.config.get("openai", {}).get("api_key")
@@ -73,6 +93,8 @@ class LLMBackend:
                 return self._generate_openai(prompt)
             elif self.current_model == "ollama":
                 return self._generate_ollama(prompt)
+            elif self.current_model == "deepseek":  # Nouveau cas pour DeepSeek
+                return self._generate_deepseek(prompt)
             else:
                 return f"[LLMBackend] Unknown backend: {self.current_model}"
         except Exception as e:
@@ -86,9 +108,32 @@ class LLMBackend:
                     return self._generate_openai(prompt)
                 elif fallback_backend == "ollama":
                     return self._generate_ollama(prompt)
+                elif fallback_backend == "deepseek":  # Ajout du fallback pour DeepSeek
+                    return self._generate_deepseek(prompt)
             except Exception as e2:
                 print(f"[LLMBackend] Fallback failed: {e2}")
             return "[LLMBackend] All backends failed."
+
+    def _generate_deepseek(self, prompt):
+        api_key = self.config.get("deepseek", {}).get("api_key")
+        if not api_key:
+            raise RuntimeError("DeepSeek API key not configured")
+        
+        model = self.config.get("deepseek", {}).get("model", "deepseek-chat")
+        
+        response = requests.post(
+            "https://api.deepseek.com/v1/chat/completions",
+            headers={"Authorization": f"Bearer {api_key}"},
+            json={
+                "model": model,
+                "messages": [{"role": "user", "content": prompt}],
+                "max_tokens": 256,
+                "stream": False
+            },
+            timeout=30
+        )
+        response.raise_for_status()
+        return response.json()["choices"][0]["message"]["content"].strip()
 
     def _generate_openai(self, prompt):
         if self.client is None:

@@ -1,0 +1,2 @@
+{"tool_calls":[{"func":"initialize"}]} 
+{"tool_calls":[{"func":"shutdown"}]} 

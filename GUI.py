@@ -6,16 +6,18 @@ import plugin
 import csv
 import datetime
 import os
+import json
 from llm_backend import LLMBackend
 import pandas as pd
 import matplotlib.pyplot as plt
+from llm_status import llm_status_command
 
 llm_backend = LLMBackend()
 
 class Application(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("Interface Python")
+        self.title("🧠 DeadBot - G-Assist Diagnostic Tool")
         self.geometry("600x450")  # Augmentation de la hauteur pour accommoder les nouveaux boutons
         
         # Cadre principal pour la zone d'affichage
@@ -86,8 +88,8 @@ class Application(tk.Tk):
         """Commande !diag : appel réel au plugin"""
         self.log_msg("Système", "Commande !diag déclenchée")
         try:
-            cpu_res = plugin.cpu_diag()
-            gpu_res = plugin.gpu_diag()
+            cpu_res = plugin.execute_cpu_diag_command()
+            gpu_res = plugin.execute_gpu_diag_command()
             self.log_msg("CPU Diagnostic", cpu_res.get("diagnostic", "Pas de diagnostic"))
             self.log_msg("GPU Diagnostic", gpu_res.get("diagnostic", "Pas de diagnostic"))
         except Exception as e:
@@ -128,8 +130,8 @@ class Application(tk.Tk):
             def collect_bench():
                 while self.bench_running:
                     try:
-                        cpu_res = plugin.cpu_diag()
-                        gpu_res = plugin.gpu_diag()
+                        cpu_res = plugin.execute_cpu_diag_command()
+                        gpu_res = plugin.execute_gpu_diag_command()
                         self.bench_data.append({
                             "cpu_usage_percent": cpu_res.get("cpu_usage_percent", 0),
                             "gpu_usage_percent": gpu_res.get("gpu_usage_percent", 0),
@@ -176,8 +178,8 @@ class Application(tk.Tk):
 
     def send_llm_query(self, user_message):
         try:
-            cpu_status = plugin.cpu_diag().get("diagnostic", "Aucun diagnostic CPU disponible")
-            gpu_status = plugin.gpu_diag().get("diagnostic", "Aucun diagnostic GPU disponible")
+            cpu_status = plugin.execute_cpu_diag_command().get("diagnostic", "Aucun diagnostic CPU disponible")
+            gpu_status = plugin.execute_gpu_diag_command().get("diagnostic", "Aucun diagnostic GPU disponible")
             prompt = (
                 f"Voici l’état actuel du système :\n"
                 f"CPU : {cpu_status}\n"
@@ -189,6 +191,40 @@ class Application(tk.Tk):
             self.log_msg("DeadBot", response)
         except Exception as e:
             self.log_msg("DeadBot", f"Erreur LLM : {e}")
+
+    def simulate_gassist_plugin_call(self, command):
+        """Simule un appel plugin G-Assist crowd-style (commande unique JSON)"""
+        import plugin
+
+        if not isinstance(command, str):
+            print(f"[WARN] Command crowd must be a str, got {type(command)} → fallback to str(command)")
+            command = str(command)
+
+        tool_calls = [{"func": command}]
+        input_json = {"tool_calls": tool_calls}
+
+        # Simulation crowd: log l'entrée
+        print(f"\n[SIMU G-ASSIST] Input JSON: {json.dumps(input_json)}")
+
+        # Appelle la commande via le plugin crowd
+        commands = {
+            "cpu_diag": plugin.execute_cpu_diag_command,
+            "gpu_diag": plugin.execute_gpu_diag_command,
+            "perf_diag": plugin.execute_perf_diag_command if hasattr(plugin, "execute_perf_diag_command") else None,
+            "initialize": lambda: {"success": True, "message": "DeadBot initialized."},
+            "shutdown": lambda: {"success": True, "message": "DeadBot shutdown."}
+        }
+        handler = commands.get(command)
+        if handler:
+            response = handler()
+        else:
+            response = {"success": False, "message": f"Unknown command: {command}"}
+
+        # Print crowd-style
+        print(f"[SIMU G-ASSIST] WriteResponse (stdout crowd):\n{json.dumps(response, indent=2)}\n")
+        self.log_msg("Simu G-Assist", f"Réponse crowd: {response}")
+        return response
+
 
     def envoyer_commande(self, event=None):
         commande = self.entree.get().strip()
@@ -208,6 +244,14 @@ class Application(tk.Tk):
                 self.log_msg("Système", f"Backend IA changé en {llm_backend.current_model}")
             else:
                 self.log_msg("Système", "Impossible de changer de backend IA")
+        elif commande.lower() == "!llm_status":
+            response = llm_status_command()
+            self.log_msg("LLM Status",{response})
+        if commande.lower().startswith("/deadbot "):
+            cmd = commande.split(" ", 1)[1].strip().lower()
+            self.simulate_gassist_plugin_call(cmd)
+            self.log_msg("Simu G-Assist", f"Appel simulé /deadbot {cmd} crowd")
+            return
         else:
             # Toutes autres commandes passent par le LLM
             self.send_llm_query(commande)

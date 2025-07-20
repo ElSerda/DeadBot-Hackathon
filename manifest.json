@@ -1,25 +1,35 @@
 {
   "manifestVersion": 1,
-  "executable": "./g-assist-plugin-python.exe",
+  "executable": "./deadbot.exe",
+  "name": "deadbot",
+  "description": "Plugin crowd pour G-Assist : diagnostic système, LLM, overlay.",
+  "version": "0.2.0",
   "persistent": true,
   "functions": [
     {
-      "name": "gpu_diag",
-      "description": "Returns NVIDIA GPU diagnostics (usage, vram, temperature, etc.)",
-      "tags": ["gpu", "nvidia", "diag"]
-    },
-    {
-      "name": "cpu_diag",
-      "description": "Returns CPU diagnostics (usage, cores, threads)",
-      "tags": ["cpu", "diag"]
-    },
-    {
       "name": "initialize",
-      "description": "Initialise le plugin avant traitement"
+      "description": "Initialise le plugin avant traitement",
+      "tags": ["init"]
     },
     {
       "name": "shutdown",
-      "description": "Ferme proprement le plugin"
+      "description": "Ferme proprement le plugin",
+      "tags": ["exit"]
+    },
+    {
+      "name": "cpu_diag",
+      "description": "Diagnostic CPU/RAM/DISK (usage, fréquence, cores)",
+      "tags": ["cpu", "diag", "hardware"]
+    },
+    {
+      "name": "gpu_diag",
+      "description": "Diagnostic GPU NVIDIA (charge, VRAM, température, fréquence, throttle)",
+      "tags": ["gpu", "diag", "nvidia"]
+    },
+    {
+      "name": "perf_diag",
+      "description": "Diagnostic global CPU, GPU, RAM, disque",
+      "tags": ["perf", "diagnostic", "system"]
     }
   ]
 }
